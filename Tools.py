@@ -3,7 +3,15 @@ import numpy as np # type: ignore
 import re
 from colorama import Fore, Back # type: ignore
 import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
 from itertools import combinations_with_replacement
+# =========================
+print("=====")
+print("We have the following methods:")
+methodList = ("Length()", "MKdir()", "Check_out_Word()", "Process_Word()", "ColorList()", "PlotPara()   ")
+for name in methodList:
+    print(f"    {name}") 
+print("=====")
 # =========================
 def Length(a:np.array):
     return (np.sqrt(np.sum(a**2)))
@@ -42,6 +50,21 @@ def ColorList(p=False):
         print("Loading color ...")
 
     return color
+
+def PlotPara(tickdir='out', labelsize=14, ticksize=12, titlesize=16, nx=False, dx=False):
+    plt.rc('xtick', direction=tickdir, labelsize=ticksize, top=True)
+    plt.rc('ytick', direction=tickdir, labelsize=ticksize, right=True)
+    plt.rc('axes', titlesize=titlesize, labelsize=labelsize)
+
+    if nx:
+        plt.gca().xaxis.set_major_locator(ticker.MaxNLocator(nbins=nx))
+    else:
+        pass
+    
+    if dx:
+        plt.gca().xaxis.set_major_locator(ticker.MultipleLocator(dx))
+    else:
+        pass
 
 def Sum_Combination(n, Ntot):
     combinations = []
