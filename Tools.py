@@ -1,17 +1,18 @@
 import os
+import shutil
 import numpy as np # type: ignore
-import re
 from colorama import Fore, Back # type: ignore
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 from itertools import combinations_with_replacement
 # =========================
-print("=====")
-print("We have the following methods:")
-methodList = ("Length()", "MKdir()", "Check_out_Word()", "Process_Word()", "ColorList()", "PlotPara()   ")
-for name in methodList:
-    print(f"    {name}") 
-print("=====")
+def _Info_():
+    print("=====")
+    print("We have the following methods:")
+    methodList = ("Length()", "MKdir()", "Check_out_Word()", "Process_Word()", "ColorList()", "PlotPara()   ")
+    for name in methodList:
+        print(f"    {name}") 
+    print("=====")    
 # =========================
 def Length(a:np.array):
     return (np.sqrt(np.sum(a**2)))
@@ -24,12 +25,11 @@ def M_Rotate(deg):
 # =========================
 def MKdir(path, rm):
     if os.path.isdir(path) and rm:
-        os.system(f"rm -r {path}")
-        os.mkdir(path)
+        shutil.rmtree(path)
     elif os.path.isdir(path) and not(rm):
         pass
     else:
-        os.mkdir(path)
+        os.makedirs(path, exist_ok=True)
 # =========================
 def Check_out_Word(word: str):
     print(Fore.BLACK, Back.RED + word + Back.RESET, Fore.RESET)
@@ -47,7 +47,7 @@ def ColorList(p=False):
         plt.yticks([])
         plt.show()
     else:
-        print("Loading color ...")
+        pass
 
     return color
 
